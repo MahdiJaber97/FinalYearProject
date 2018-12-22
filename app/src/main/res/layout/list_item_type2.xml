@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="30dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:background="@drawable/shape"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:layout_width="350dp"
+        android:layout_height="250dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/sleeping"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp" />
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Sleeping Times"
+                android:textSize="25sp"
+                android:textColor="#234"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp" />
+        </LinearLayout>
+        <Button
+            android:layout_marginLeft="125dp"
+            android:layout_marginTop="20dp"
+            android:text="Insert"
+            android:textColor="#f9031f"
+            android:textStyle="bold"
+            android:background="#cdcece"
+            android:id="@+id/Insert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="20dp"
+            android:text="Check Old Measurements"
+            android:textColor="#f9031f"
+            android:textStyle="bold"
+            android:background="#cdcdce"
+            android:id="@+id/CheckMeasurements"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

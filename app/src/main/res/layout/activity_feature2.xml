@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#FFF"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".feature2">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mainlayout"
+        android:background="@drawable/background"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60px"
+                android:text="BMR"
+                android:textColor="#000"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/BMR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="180dp"
+                android:text="BMR"
+                android:textColor="#000"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60px"
+                android:layout_marginTop="10dp"
+                android:text="Daily Requirements"
+                android:textColor="#000"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/requirements"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:text="x calories"
+                android:textColor="#000"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60px"
+                android:layout_marginTop="10dp"
+                android:text="Days left"
+                android:textColor="#000"
+                android:textSize="20dp" />
+
+            <TextView
+
+                android:id="@+id/days"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="145dp"
+                android:layout_marginTop="10dp"
+                android:hint="0 days"
+                android:textSize="20dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60px"
+                android:layout_marginTop="10dp"
+                android:text="Progress"
+                android:textColor="#000"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/percentage"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="143dp"
+                android:layout_marginTop="10dp"
+                android:hint="0%"
+                android:textSize="20dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/kitchen"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp" />
+            <Button
+                android:id="@+id/addfood"
+                android:layout_width="70dp"
+                android:textSize="10dp"
+                android:background="#000000"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Add Food"
+                android:layout_marginRight="10dp"
+                android:textColor="#fff" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/exercises"
+                android:layout_marginLeft="5dp"
+                />
+            <Button
+                android:id="@+id/addexercise"
+                android:layout_width="70dp"
+                android:textSize="10dp"
+                android:background="#000"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Add Exercise"
+                android:textColor="#fff" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/nextday"
+                />
+            <Button
+                android:id="@+id/nextday"
+                android:layout_width="70dp"
+                android:textSize="10dp"
+                android:background="#000"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="NExt Day"
+                android:textColor="#fff" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/meas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Measurements"/>
+</LinearLayout>
+
+
+</ScrollView>
