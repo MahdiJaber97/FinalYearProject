@@ -51,6 +51,9 @@ dependencies {
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
 
+    // Circular Progress Bars Dependencies
+    implementation 'com.github.lzyzsd:circleprogress:1.2.1'
+
     // Test helpers
     testImplementation "android.arch.persistence.room:testing:$room_version"
     // NOTE: Do not place your application dependencies here; they belong

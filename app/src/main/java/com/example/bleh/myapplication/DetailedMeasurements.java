@@ -18,6 +18,7 @@ public class DetailedMeasurements extends AppCompatActivity {
         ArrayList<Item> itemList = new ArrayList<Item>();
         itemList.add(new Item("Item " + 1, Item.ItemType.ONE_ITEM));
         itemList.add(new Item("Item " + 2, Item.ItemType.TWO_ITEM));
+        itemList.add(new Item("Item " + 3, Item.ItemType.THREE_ITEM));
         recyclerView = findViewById(R.id.recyclerview);
         ItemArrayAdapter itemArrayAdapter = new ItemArrayAdapter(itemList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

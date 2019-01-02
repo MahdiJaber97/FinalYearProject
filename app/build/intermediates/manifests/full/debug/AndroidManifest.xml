@@ -8,6 +8,9 @@
         android:minSdkVersion="15"
         android:targetSdkVersion="27" />
 
+    <uses-feature android:name="android.hardware.sensor.stepcounter" />
+    <uses-feature android:name="android.hardware.sensor.stepdetector" />
+
     <application
         android:allowBackup="false"
         android:debuggable="true"

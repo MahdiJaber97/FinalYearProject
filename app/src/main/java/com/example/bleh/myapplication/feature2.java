@@ -19,6 +19,7 @@ import com.example.bleh.myapplication.DB.Food;
 import com.example.bleh.myapplication.DB.Plan;
 import com.example.bleh.myapplication.DB.User;
 import com.example.bleh.myapplication.Utils.FormulaUtils;
+import com.github.lzyzsd.circleprogress.DonutProgress;
 
 import org.w3c.dom.Text;
 
@@ -30,10 +31,11 @@ public class feature2 extends AppCompatActivity {
 
     public AppDatabase mydb;
 
-    TextView BMR,requirements,days,percentage;
+    TextView BMR,requirements,days;
     Button addfood,addex,nextday;
     LinearLayout mainLayout;
     Button Meas;
+    DonutProgress donutProgress;
     Plan plan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,17 +57,23 @@ public class feature2 extends AppCompatActivity {
         addex = findViewById(R.id.addexercise);
         addfood = findViewById(R.id.addfood);
         BMR = findViewById(R.id.BMR);
+        donutProgress = findViewById(R.id.donut_progress);
         requirements = findViewById(R.id.requirements);
         days = findViewById(R.id.days);
-        percentage = findViewById(R.id.percentage);
-
         final User user = mydb.getUserDao(feature2.this).getUserById((int) userid);
         plan = mydb.getPlanDao(feature2.this).getPlanById((int) planid);
         DecimalFormat df = new DecimalFormat("#.##");
         BMR.setText(df.format(plan.bmr));
         days.setText(""+plan.nbOfDays+" days");
         double progress = FormulaUtils.calculatePercentage(user.getWeight(), plan.currentWeight, plan.amount, plan.type);
-        percentage.setText(""+progress+" %");
+        try {
+            donutProgress.setDonut_progress(String.valueOf(progress));
+        }
+        catch (Exception e)
+        {
+            donutProgress.setDonut_progress("0");
+        }
+        donutProgress.setProgress((float)progress);
         requirements.setText(FormulaUtils.CalulcateDailyRequirements(plan.getWorkoutPerWeek(), plan.getBmr()));
         if( progress >= 100 || plan.nbOfDays <0)
         {

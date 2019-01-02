@@ -1,5 +1,10 @@
 package com.example.bleh.myapplication;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.icu.util.Measure;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,13 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class ItemArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_ONE = 1;
     private static final int TYPE_TWO = 2;
-
+    private static final int TYPE_THREE = 3;
+    private SensorManager sensorManager;
     private ArrayList<Item> itemList;
     // Constructor of the class
     public ItemArrayAdapter(ArrayList<Item> itemList) {
@@ -35,9 +42,10 @@ public class ItemArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             return TYPE_ONE;
         } else if (item.getType() == Item.ItemType.TWO_ITEM) {
             return TYPE_TWO;
-        } else {
-            return -1;
+        } else if (item.getType() == Item.ItemType.THREE_ITEM){
+            return TYPE_THREE;
         }
+        else return -1;
     }
 
 
@@ -46,15 +54,18 @@ public class ItemArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ONE)
         {
-            Log.wtf("Type1","");
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_type1, parent, false);
             return new ViewHolderOne(view);
         }
         else if (viewType == TYPE_TWO)
         {
-            Log.wtf("Type2","");
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_type2, parent, false);
             return new ViewHolderTwo(view);
+        }
+        else if (viewType == TYPE_THREE)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_type3, parent, false);
+            return new ViewHolderThree(view);
         }
         else {
             throw new RuntimeException("The type has to be ONE or TWO");
@@ -70,6 +81,9 @@ public class ItemArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 break;
             case TYPE_TWO:
                 initLayoutTwo((ViewHolderTwo) holder, listPosition);
+                break;
+            case TYPE_THREE:
+                initLayoutThree((ViewHolderThree) holder, listPosition);
                 break;
             default:
                 break;
@@ -112,6 +126,11 @@ public class ItemArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         });
     }
 
+    private void initLayoutThree(final ViewHolderThree holder, int pos)
+    {
+        holder.stepsMoved.setText("6237 Steps Moved Today!");
+    }
+
 
     // Static inner class to initialize the views of rows
     static class ViewHolderOne extends RecyclerView.ViewHolder {
@@ -129,6 +148,36 @@ public class ItemArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             super(itemView);
             Insert = itemView.findViewById(R.id.Insert);
             checkOldMeasurements = itemView.findViewById(R.id.CheckMeasurements);
+        }
+    }
+
+    static class ViewHolderThree extends RecyclerView.ViewHolder implements SensorEventListener{
+        TextView stepsMoved;
+        SensorManager sensorManager;
+        public ViewHolderThree(View itemView) {
+            super(itemView);
+            stepsMoved = itemView.findViewById(R.id.steps);
+            sensorManager = (SensorManager)itemView.getContext().getSystemService(Context.SENSOR_SERVICE);
+            Sensor sensorCount = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+            if(sensorCount!= null)
+            {
+                sensorManager.registerListener(this,sensorCount,SensorManager.SENSOR_DELAY_UI);
+            }
+            else
+            {
+                Toast.makeText(itemView.getContext(),"Count Sensor Not Available",Toast.LENGTH_LONG).show();
+            }
+
+        }
+
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            stepsMoved.setText(String.valueOf(sensorEvent.values[0]));
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+
         }
     }
 }

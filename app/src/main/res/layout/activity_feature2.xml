@@ -98,19 +98,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60px"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:text="Progress"
                 android:textColor="#000"
                 android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/percentage"
-                android:layout_width="100dp"
+            <com.github.lzyzsd.circleprogress.DonutProgress
+                android:layout_marginLeft="135dp"
+                android:layout_marginTop="15dp"
+                android:id="@+id/donut_progress"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="143dp"
-                android:layout_marginTop="10dp"
-                android:hint="0%"
-                android:textSize="20dp"/>
+                />
 
         </LinearLayout>
 
