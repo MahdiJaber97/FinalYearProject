@@ -2,7 +2,6 @@ package com.example.bleh.myapplication;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,10 +17,8 @@ import com.example.bleh.myapplication.DB.Exercise;
 import com.example.bleh.myapplication.DB.Food;
 import com.example.bleh.myapplication.DB.Plan;
 import com.example.bleh.myapplication.DB.User;
-import com.example.bleh.myapplication.Utils.FormulaUtils;
+import com.example.bleh.myapplication.Utils1.FormulaUtils;
 import com.github.lzyzsd.circleprogress.DonutProgress;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -34,7 +31,7 @@ public class feature2 extends AppCompatActivity {
     TextView BMR,requirements,days;
     Button addfood,addex,nextday;
     LinearLayout mainLayout;
-    Button Meas;
+    Button Meas,Bluetooth;
     DonutProgress donutProgress;
     Plan plan;
     @Override
@@ -45,6 +42,14 @@ public class feature2 extends AppCompatActivity {
         final long planid = intent.getExtras().getLong("planid");
         final long userid = intent.getExtras().getLong("uid");
         mydb = AppDatabase.getInstance(feature2.this);
+        Bluetooth = findViewById(R.id.BluetoothConnection);
+        Bluetooth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),BLEConnection.class);
+                startActivity(intent);
+            }
+        });
         Meas = findViewById(R.id.meas);
         Meas.setOnClickListener(new View.OnClickListener() {
             @Override

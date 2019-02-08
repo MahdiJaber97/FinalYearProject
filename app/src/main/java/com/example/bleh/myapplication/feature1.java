@@ -3,7 +3,6 @@ package com.example.bleh.myapplication;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,12 +14,10 @@ import android.widget.Toast;
 import com.example.bleh.myapplication.DB.AppDatabase;
 import com.example.bleh.myapplication.DB.Plan;
 import com.example.bleh.myapplication.DB.User;
-import com.example.bleh.myapplication.DB.UserDao;
-import com.example.bleh.myapplication.Utils.FormulaUtils;
+import com.example.bleh.myapplication.Utils1.FormulaUtils;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class feature1 extends AppCompatActivity {

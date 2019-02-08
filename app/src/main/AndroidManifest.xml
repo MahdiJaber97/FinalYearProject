@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bleh.myapplication">
-    <uses-feature android:name="android.hardware.sensor.stepcounter"/>
-    <uses-feature android:name="android.hardware.sensor.stepdetector"/>
+
+    <uses-feature android:name="android.hardware.sensor.stepcounter" />
+    <uses-feature android:name="android.hardware.sensor.stepdetector" />
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="false"
@@ -23,7 +32,16 @@
         <activity android:name=".SignUp" />
         <activity android:name=".feature2" />
         <activity android:name=".Measurements" />
-        <activity android:name=".DetailedMeasurements"></activity>
+        <activity android:name=".DetailedMeasurements" />
+        <activity android:name=".BLEConnection" />
+        <activity android:name=".Activity_BTLE_Services" />
+
+        <service
+            android:name=".Service_BTLE_GATT"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".BodyComposition"></activity>
     </application>
 
 </manifest>

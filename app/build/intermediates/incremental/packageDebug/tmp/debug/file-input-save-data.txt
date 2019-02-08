@@ -1,7 +1,11 @@
 #Internal package file, do not edit.
-#Wed Dec 19 21:13:35 EET 2018
+#Sat Jan 05 21:39:41 EET 2019
+1.base=C\:\\Users\\user\\Desktop\\MyApplication\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 0.baseType=DIRECTORY
-0.base=C\:\\Users\\user\\Desktop\\MyApplication\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+1.baseType=DIRECTORY
+count=2
+1.set=DEX
 0.path=classes.dex
 0.set=DEX
-count=1
+0.base=C\:\\Users\\user\\Desktop\\MyApplication\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\1
+1.path=classes.dex

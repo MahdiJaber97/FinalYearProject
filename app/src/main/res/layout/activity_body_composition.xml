@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context=".BodyComposition">
+
+    <TextView
+        android:text="Fats"
+        android:textColor="#b5e61d"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="15dp"
+        android:textSize="40sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="250dp"
+
+        android:background="#b5e61d"
+        android:layout_width="100dp"
+        android:layout_height="50dp" />
+    <TextView
+        android:text="Muscles"
+        android:textColor="#ff7f27"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="80dp"
+        android:textSize="40sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="250dp"
+        android:background="#ff7f27"
+        android:layout_width="100dp"
+        android:layout_height="50dp" />
+    <ImageView
+        android:src="@drawable/body2"
+        android:id="@+id/body1"
+        android:layout_marginTop="180dp"
+        android:layout_marginLeft="70dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp" />
+    <TextView
+        android:layout_marginTop="400dp"
+        android:text="Fats:"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:textColor="#000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/FatsPercentage"
+        android:layout_marginTop="400dp"
+        android:text="Fats Percentage"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="80dp"
+        android:textColor="#000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="450dp"
+        android:text="Muscles:"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:textColor="#000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/MusclesPercentage"
+        android:layout_marginTop="450dp"
+        android:text="Muscles Percentage"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="120dp"
+        android:textColor="#000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

@@ -21,6 +21,8 @@ public class ItemArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private static final int TYPE_ONE = 1;
     private static final int TYPE_TWO = 2;
     private static final int TYPE_THREE = 3;
+    private static final int TYPE_FOUR = 4;
+    private static final int TYPE_FIVE = 5;
     private SensorManager sensorManager;
     private ArrayList<Item> itemList;
     // Constructor of the class
@@ -44,6 +46,10 @@ public class ItemArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             return TYPE_TWO;
         } else if (item.getType() == Item.ItemType.THREE_ITEM){
             return TYPE_THREE;
+        } else if (item.getType() == Item.ItemType.FOUR_ITEM){
+            return TYPE_FOUR;
+        } else if (item.getType() == Item.ItemType.FIVE_ITEM){
+            return TYPE_FIVE;
         }
         else return -1;
     }
@@ -67,6 +73,16 @@ public class ItemArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_type3, parent, false);
             return new ViewHolderThree(view);
         }
+        else if (viewType == TYPE_FOUR)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_type4, parent, false);
+            return new ViewHolderFour(view);
+        }
+        else if (viewType == TYPE_FIVE)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_type5, parent, false);
+            return new ViewHolderFive(view);
+        }
         else {
             throw new RuntimeException("The type has to be ONE or TWO");
         }
@@ -84,6 +100,12 @@ public class ItemArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 break;
             case TYPE_THREE:
                 initLayoutThree((ViewHolderThree) holder, listPosition);
+                break;
+            case TYPE_FOUR:
+                initLayoutFour((ViewHolderFour) holder, listPosition);
+                break;
+            case TYPE_FIVE:
+                initLayoutFive((ViewHolderFive) holder, listPosition);
                 break;
             default:
                 break;
@@ -131,6 +153,21 @@ public class ItemArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         holder.stepsMoved.setText("6237 Steps Moved Today!");
     }
 
+    private void initLayoutFour(final ViewHolderFour holder, int pos)
+    {
+
+    }
+
+    private void initLayoutFive(final ViewHolderFive holder, int pos)
+    {
+        holder.MeasureBodyComposition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(),BodyComposition.class);
+                view.getContext().startActivity(intent);
+            }
+        });
+    }
 
     // Static inner class to initialize the views of rows
     static class ViewHolderOne extends RecyclerView.ViewHolder {
@@ -167,7 +204,6 @@ public class ItemArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             {
                 Toast.makeText(itemView.getContext(),"Count Sensor Not Available",Toast.LENGTH_LONG).show();
             }
-
         }
 
         @Override
@@ -178,6 +214,20 @@ public class ItemArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @Override
         public void onAccuracyChanged(Sensor sensor, int i) {
 
+        }
+    }
+
+    static class ViewHolderFour extends RecyclerView.ViewHolder {
+        public ViewHolderFour(View itemView) {
+            super(itemView);
+        }
+    }
+
+    static class ViewHolderFive extends RecyclerView.ViewHolder {
+        Button MeasureBodyComposition;
+        public ViewHolderFive(View itemView) {
+            super(itemView);
+            MeasureBodyComposition = itemView.findViewById(R.id.MeasureBodyComposition);
         }
     }
 }

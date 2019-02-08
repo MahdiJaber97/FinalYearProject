@@ -2,7 +2,7 @@ package com.example.bleh.myapplication;
 
 public class Item {
     public enum ItemType {
-        ONE_ITEM, TWO_ITEM, THREE_ITEM;
+        ONE_ITEM, TWO_ITEM, THREE_ITEM, FOUR_ITEM, FIVE_ITEM;
     }
 
     private String name;
