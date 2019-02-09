@@ -34,7 +34,7 @@
             <com.github.lzyzsd.circleprogress.DonutProgress
                 android:layout_marginLeft="80dp"
                 android:layout_marginTop="15dp"
-                android:id="@+id/donut_progress"
+                android:id="@+id/water_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
                 />

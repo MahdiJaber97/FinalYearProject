@@ -1082,6 +1082,7 @@ id username
 id view_offset_helper
 id visible
 id waterGlasses
+id water_progress
 id weight
 id withText
 id workoutweekly
@@ -1131,6 +1132,7 @@ layout activity_btle_services
 layout activity_detailed_measurements
 layout activity_feature1
 layout activity_feature2
+layout activity_insert_sleep_times
 layout activity_measurements
 layout activity_sign_up
 layout activity_sign_up2
@@ -1183,6 +1185,7 @@ mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 mipmap kitchen
 mipmap nextday
+mipmap time
 string CLIENT_CHARACTERISTIC_CONFIG
 string abc_action_bar_home_description
 string abc_action_bar_up_description

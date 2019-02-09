@@ -1,6 +1,7 @@
 package com.example.bleh.myapplication;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -15,6 +16,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.lzyzsd.circleprogress.DonutProgress;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ItemArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -135,7 +139,7 @@ public class ItemArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         holder.Insert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),Measurements.class);
+                Intent intent = new Intent(view.getContext(),InsertSleepTimes.class);
                 view.getContext().startActivity(intent);
             }
         });
@@ -218,8 +222,36 @@ public class ItemArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     static class ViewHolderFour extends RecyclerView.ViewHolder {
-        public ViewHolderFour(View itemView) {
+        Button addWater;
+        TextView WaterGlasses;
+        DonutProgress WaterProgress;
+        public ViewHolderFour(View itemView)
+        {
             super(itemView);
+            addWater = itemView.findViewById(R.id.AddWater);
+            WaterGlasses = itemView.findViewById(R.id.waterGlasses);
+            WaterProgress = itemView.findViewById(R.id.water_progress);
+            SharedPreferences sharedPreferences = itemView.getContext().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+            final SharedPreferences.Editor editor = sharedPreferences.edit();
+            final int[] waterGlasses = {sharedPreferences.getInt("WaterCount", 0)};
+            WaterGlasses.setText("You have Drank "+ String.valueOf(waterGlasses[0])+" Water Glasses today");
+            final DecimalFormat df = new DecimalFormat("#.##");
+            double percentage = waterGlasses[0] / 7.00 * 100.00;
+            percentage = Double.parseDouble(df.format(percentage));
+            WaterProgress.setProgress((float)percentage);
+            addWater.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    waterGlasses[0]++;
+                    editor.putInt("WaterCount",waterGlasses[0]);
+                    editor.apply();
+                    WaterGlasses.setText("You have Drank "+ String.valueOf(waterGlasses[0])+" Water Glasses today");
+                    double percentage = waterGlasses[0] / 7.00 * 100.00;
+                    percentage = Double.parseDouble(df.format(percentage));
+                    WaterProgress.setProgress((float)percentage);
+                    WaterProgress.setSuffixText("%");
+                }
+            });
         }
     }
 

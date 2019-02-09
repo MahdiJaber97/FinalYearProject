@@ -41,7 +41,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".BodyComposition"></activity>
+        <activity android:name=".BodyComposition" />
+        <activity android:name=".InsertSleepTimes"></activity>
     </application>
 
 </manifest>

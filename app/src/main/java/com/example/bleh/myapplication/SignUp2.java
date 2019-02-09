@@ -88,7 +88,9 @@ public class SignUp2 extends AppCompatActivity {
         intent.putExtra("planid",planid);
         SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putLong("UserID",uid);editor.putLong("PlanID",planid);
+        editor.putLong("UserID",uid);
+        editor.putLong("PlanID",planid);
+        editor.putInt("WaterCount",0);
         editor.apply();
         Toast.makeText(this,"Welcome to the Well-Being Application",Toast.LENGTH_LONG).show();
         startActivity(intent);
