@@ -35,16 +35,19 @@
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/spinnerS1"
             android:layout_marginLeft="100dp"
             android:layout_marginTop="40dp"></Spinner>
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/spinnerS2"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="40dp"></Spinner>
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/spinnerS3"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="40dp"></Spinner>
     </LinearLayout>
@@ -60,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:text="Time of Sleep:"
+            android:text="Time of WakeUp:"
             android:textColor="#000"
             android:textStyle="bold"
             android:layout_marginLeft="20dp"
@@ -76,16 +79,19 @@
 
         <Spinner
             android:layout_width="wrap_content"
+            android:id="@+id/spinnerW1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
             android:layout_marginTop="40dp"></Spinner>
         <Spinner
             android:layout_width="wrap_content"
+            android:id="@+id/spinnerW2"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="40dp"></Spinner>
         <Spinner
             android:layout_width="wrap_content"
+            android:id="@+id/spinnerW3"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="40dp"></Spinner>

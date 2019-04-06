@@ -35,11 +35,11 @@ public class AppDatabase_Impl extends AppDatabase {
       @Override
       public void createAllTables(SupportSQLiteDatabase _db) {
         _db.execSQL("CREATE TABLE IF NOT EXISTS `User` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `first_name` TEXT, `last_name` TEXT, `username` TEXT, `password` TEXT, `birthDay` INTEGER NOT NULL, `sex` TEXT, `height` REAL NOT NULL, `weight` REAL NOT NULL)");
-        _db.execSQL("CREATE TABLE IF NOT EXISTS `Food` (`foodID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `food_name` TEXT, `calories` REAL NOT NULL)");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `Food` (`foodID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `food_name` TEXT, `food_type` TEXT, `calories` REAL NOT NULL)");
         _db.execSQL("CREATE TABLE IF NOT EXISTS `Exercise` (`exerciseId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `exercise_name` TEXT, `met` REAL NOT NULL)");
-        _db.execSQL("CREATE TABLE IF NOT EXISTS `Plan` (`planid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `uid` INTEGER NOT NULL, `type` TEXT, `nbOfDays` INTEGER NOT NULL, `amount` REAL NOT NULL, `progress` INTEGER NOT NULL, `bmr` REAL NOT NULL, `workoutPerWeek` INTEGER NOT NULL, `currentWeight` REAL NOT NULL)");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `Plan` (`planid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `uid` INTEGER NOT NULL, `planDistribution` REAL NOT NULL, `workOutSessionDuration` INTEGER NOT NULL, `type` TEXT, `nbOfDays` INTEGER NOT NULL, `amount` REAL NOT NULL, `progress` INTEGER NOT NULL, `bmr` REAL NOT NULL, `workoutPerWeek` INTEGER NOT NULL, `currentWeight` REAL NOT NULL)");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"615c87294c5a416a41605115be09be8d\")");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"f85f9deedd9179a6c11a48f0b8e01c52\")");
       }
 
       @Override
@@ -91,9 +91,10 @@ public class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoUser + "\n"
                   + " Found:\n" + _existingUser);
         }
-        final HashMap<String, TableInfo.Column> _columnsFood = new HashMap<String, TableInfo.Column>(3);
+        final HashMap<String, TableInfo.Column> _columnsFood = new HashMap<String, TableInfo.Column>(4);
         _columnsFood.put("foodID", new TableInfo.Column("foodID", "INTEGER", true, 1));
         _columnsFood.put("food_name", new TableInfo.Column("food_name", "TEXT", false, 0));
+        _columnsFood.put("food_type", new TableInfo.Column("food_type", "TEXT", false, 0));
         _columnsFood.put("calories", new TableInfo.Column("calories", "REAL", true, 0));
         final HashSet<TableInfo.ForeignKey> _foreignKeysFood = new HashSet<TableInfo.ForeignKey>(0);
         final HashSet<TableInfo.Index> _indicesFood = new HashSet<TableInfo.Index>(0);
@@ -117,9 +118,11 @@ public class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoExercise + "\n"
                   + " Found:\n" + _existingExercise);
         }
-        final HashMap<String, TableInfo.Column> _columnsPlan = new HashMap<String, TableInfo.Column>(9);
+        final HashMap<String, TableInfo.Column> _columnsPlan = new HashMap<String, TableInfo.Column>(11);
         _columnsPlan.put("planid", new TableInfo.Column("planid", "INTEGER", true, 1));
         _columnsPlan.put("uid", new TableInfo.Column("uid", "INTEGER", true, 0));
+        _columnsPlan.put("planDistribution", new TableInfo.Column("planDistribution", "REAL", true, 0));
+        _columnsPlan.put("workOutSessionDuration", new TableInfo.Column("workOutSessionDuration", "INTEGER", true, 0));
         _columnsPlan.put("type", new TableInfo.Column("type", "TEXT", false, 0));
         _columnsPlan.put("nbOfDays", new TableInfo.Column("nbOfDays", "INTEGER", true, 0));
         _columnsPlan.put("amount", new TableInfo.Column("amount", "REAL", true, 0));
@@ -137,7 +140,7 @@ public class AppDatabase_Impl extends AppDatabase {
                   + " Found:\n" + _existingPlan);
         }
       }
-    }, "615c87294c5a416a41605115be09be8d", "9194782d1c04a016ab1eb4d193d8c69a");
+    }, "f85f9deedd9179a6c11a48f0b8e01c52", "5bbcaf2880c899581a51e95178290091");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)

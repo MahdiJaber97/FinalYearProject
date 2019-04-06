@@ -25,24 +25,26 @@ public class PlanDao_Impl implements PlanDao {
     this.__insertionAdapterOfPlan = new EntityInsertionAdapter<Plan>(__db) {
       @Override
       public String createQuery() {
-        return "INSERT OR ABORT INTO `Plan`(`planid`,`uid`,`type`,`nbOfDays`,`amount`,`progress`,`bmr`,`workoutPerWeek`,`currentWeight`) VALUES (nullif(?, 0),?,?,?,?,?,?,?,?)";
+        return "INSERT OR ABORT INTO `Plan`(`planid`,`uid`,`planDistribution`,`workOutSessionDuration`,`type`,`nbOfDays`,`amount`,`progress`,`bmr`,`workoutPerWeek`,`currentWeight`) VALUES (nullif(?, 0),?,?,?,?,?,?,?,?,?,?)";
       }
 
       @Override
       public void bind(SupportSQLiteStatement stmt, Plan value) {
         stmt.bindLong(1, value.planid);
         stmt.bindLong(2, value.uid);
+        stmt.bindDouble(3, value.planDistribution);
+        stmt.bindLong(4, value.workOutSessionDuration);
         if (value.type == null) {
-          stmt.bindNull(3);
+          stmt.bindNull(5);
         } else {
-          stmt.bindString(3, value.type);
+          stmt.bindString(5, value.type);
         }
-        stmt.bindLong(4, value.nbOfDays);
-        stmt.bindDouble(5, value.amount);
-        stmt.bindLong(6, value.progress);
-        stmt.bindDouble(7, value.bmr);
-        stmt.bindLong(8, value.workoutPerWeek);
-        stmt.bindDouble(9, value.currentWeight);
+        stmt.bindLong(6, value.nbOfDays);
+        stmt.bindDouble(7, value.amount);
+        stmt.bindLong(8, value.progress);
+        stmt.bindDouble(9, value.bmr);
+        stmt.bindLong(10, value.workoutPerWeek);
+        stmt.bindDouble(11, value.currentWeight);
       }
     };
     this.__deletionAdapterOfPlan = new EntityDeletionOrUpdateAdapter<Plan>(__db) {
@@ -59,25 +61,27 @@ public class PlanDao_Impl implements PlanDao {
     this.__updateAdapterOfPlan = new EntityDeletionOrUpdateAdapter<Plan>(__db) {
       @Override
       public String createQuery() {
-        return "UPDATE OR ABORT `Plan` SET `planid` = ?,`uid` = ?,`type` = ?,`nbOfDays` = ?,`amount` = ?,`progress` = ?,`bmr` = ?,`workoutPerWeek` = ?,`currentWeight` = ? WHERE `planid` = ?";
+        return "UPDATE OR ABORT `Plan` SET `planid` = ?,`uid` = ?,`planDistribution` = ?,`workOutSessionDuration` = ?,`type` = ?,`nbOfDays` = ?,`amount` = ?,`progress` = ?,`bmr` = ?,`workoutPerWeek` = ?,`currentWeight` = ? WHERE `planid` = ?";
       }
 
       @Override
       public void bind(SupportSQLiteStatement stmt, Plan value) {
         stmt.bindLong(1, value.planid);
         stmt.bindLong(2, value.uid);
+        stmt.bindDouble(3, value.planDistribution);
+        stmt.bindLong(4, value.workOutSessionDuration);
         if (value.type == null) {
-          stmt.bindNull(3);
+          stmt.bindNull(5);
         } else {
-          stmt.bindString(3, value.type);
+          stmt.bindString(5, value.type);
         }
-        stmt.bindLong(4, value.nbOfDays);
-        stmt.bindDouble(5, value.amount);
-        stmt.bindLong(6, value.progress);
-        stmt.bindDouble(7, value.bmr);
-        stmt.bindLong(8, value.workoutPerWeek);
-        stmt.bindDouble(9, value.currentWeight);
-        stmt.bindLong(10, value.planid);
+        stmt.bindLong(6, value.nbOfDays);
+        stmt.bindDouble(7, value.amount);
+        stmt.bindLong(8, value.progress);
+        stmt.bindDouble(9, value.bmr);
+        stmt.bindLong(10, value.workoutPerWeek);
+        stmt.bindDouble(11, value.currentWeight);
+        stmt.bindLong(12, value.planid);
       }
     };
   }
@@ -126,6 +130,8 @@ public class PlanDao_Impl implements PlanDao {
     try {
       final int _cursorIndexOfPlanid = _cursor.getColumnIndexOrThrow("planid");
       final int _cursorIndexOfUid = _cursor.getColumnIndexOrThrow("uid");
+      final int _cursorIndexOfPlanDistribution = _cursor.getColumnIndexOrThrow("planDistribution");
+      final int _cursorIndexOfWorkOutSessionDuration = _cursor.getColumnIndexOrThrow("workOutSessionDuration");
       final int _cursorIndexOfType = _cursor.getColumnIndexOrThrow("type");
       final int _cursorIndexOfNbOfDays = _cursor.getColumnIndexOrThrow("nbOfDays");
       final int _cursorIndexOfAmount = _cursor.getColumnIndexOrThrow("amount");
@@ -138,6 +144,8 @@ public class PlanDao_Impl implements PlanDao {
         _result = new Plan();
         _result.planid = _cursor.getInt(_cursorIndexOfPlanid);
         _result.uid = _cursor.getInt(_cursorIndexOfUid);
+        _result.planDistribution = _cursor.getDouble(_cursorIndexOfPlanDistribution);
+        _result.workOutSessionDuration = _cursor.getInt(_cursorIndexOfWorkOutSessionDuration);
         _result.type = _cursor.getString(_cursorIndexOfType);
         _result.nbOfDays = _cursor.getInt(_cursorIndexOfNbOfDays);
         _result.amount = _cursor.getDouble(_cursorIndexOfAmount);
@@ -167,6 +175,8 @@ public class PlanDao_Impl implements PlanDao {
     try {
       final int _cursorIndexOfPlanid = _cursor.getColumnIndexOrThrow("planid");
       final int _cursorIndexOfUid = _cursor.getColumnIndexOrThrow("uid");
+      final int _cursorIndexOfPlanDistribution = _cursor.getColumnIndexOrThrow("planDistribution");
+      final int _cursorIndexOfWorkOutSessionDuration = _cursor.getColumnIndexOrThrow("workOutSessionDuration");
       final int _cursorIndexOfType = _cursor.getColumnIndexOrThrow("type");
       final int _cursorIndexOfNbOfDays = _cursor.getColumnIndexOrThrow("nbOfDays");
       final int _cursorIndexOfAmount = _cursor.getColumnIndexOrThrow("amount");
@@ -179,6 +189,8 @@ public class PlanDao_Impl implements PlanDao {
         _result = new Plan();
         _result.planid = _cursor.getInt(_cursorIndexOfPlanid);
         _result.uid = _cursor.getInt(_cursorIndexOfUid);
+        _result.planDistribution = _cursor.getDouble(_cursorIndexOfPlanDistribution);
+        _result.workOutSessionDuration = _cursor.getInt(_cursorIndexOfWorkOutSessionDuration);
         _result.type = _cursor.getString(_cursorIndexOfType);
         _result.nbOfDays = _cursor.getInt(_cursorIndexOfNbOfDays);
         _result.amount = _cursor.getDouble(_cursorIndexOfAmount);

@@ -82,12 +82,11 @@ public class SignUp2 extends AppCompatActivity {
         long planid = mydb.getPlanDao(SignUp2.this).insert(plan);
 
         Intent intent = new Intent(this, feature1.class);
-        //putExtra can take keye + custom object (user for example), make user serializable or parcelable to send it as one object
-        //make a variable for every edit text instead of converting it on spot like this
         intent.putExtra("uid",uid);
         intent.putExtra("planid",planid);
         SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("EnterCount",-1);
         editor.putLong("UserID",uid);
         editor.putLong("PlanID",planid);
         editor.putInt("WaterCount",0);

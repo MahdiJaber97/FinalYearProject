@@ -1,5 +1,7 @@
 package com.example.bleh.myapplication.Utils1;
 
+import com.example.bleh.myapplication.DB.Plan;
+
 import java.text.DecimalFormat;
 import java.util.Calendar;
 
@@ -17,7 +19,7 @@ public class FormulaUtils {
         return df.format(bmr);
     }
 
-    public static double calculatePercentage(double weight, double currentWeight, double goalWeight,String type){
+    public static double calculatePercentage(double weight, double currentWeight, double goalWeight, String type){
         double percentage;
         if (type.equals("Gain Weight"))
         {
@@ -54,5 +56,14 @@ public class FormulaUtils {
     public static Double reCalculateWeight (double currentweight, double remainingCalories)
     {
         return currentweight - (remainingCalories * 0.454 / 3500);
+    }
+
+    public static Double calculateRequired (Plan plan)
+    {
+        int duration = plan.nbOfDays;
+        double weightNeeded = plan.amount;
+        double KgsPerDay = weightNeeded/duration;
+        double caloriesPerDay = KgsPerDay * 3500 / 0.454;
+        return caloriesPerDay;
     }
 }

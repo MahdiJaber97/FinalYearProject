@@ -25,7 +25,7 @@ public class FoodDao_Impl implements FoodDao {
     this.__insertionAdapterOfFood = new EntityInsertionAdapter<Food>(__db) {
       @Override
       public String createQuery() {
-        return "INSERT OR ABORT INTO `Food`(`foodID`,`food_name`,`calories`) VALUES (nullif(?, 0),?,?)";
+        return "INSERT OR ABORT INTO `Food`(`foodID`,`food_name`,`food_type`,`calories`) VALUES (nullif(?, 0),?,?,?)";
       }
 
       @Override
@@ -36,7 +36,12 @@ public class FoodDao_Impl implements FoodDao {
         } else {
           stmt.bindString(2, value.food_name);
         }
-        stmt.bindDouble(3, value.calorie_value);
+        if (value.food_type == null) {
+          stmt.bindNull(3);
+        } else {
+          stmt.bindString(3, value.food_type);
+        }
+        stmt.bindDouble(4, value.calorie_value);
       }
     };
     this.__deletionAdapterOfFood = new EntityDeletionOrUpdateAdapter<Food>(__db) {
@@ -93,6 +98,7 @@ public class FoodDao_Impl implements FoodDao {
     try {
       final int _cursorIndexOfFoodID = _cursor.getColumnIndexOrThrow("foodID");
       final int _cursorIndexOfFoodName = _cursor.getColumnIndexOrThrow("food_name");
+      final int _cursorIndexOfFoodType = _cursor.getColumnIndexOrThrow("food_type");
       final int _cursorIndexOfCalorieValue = _cursor.getColumnIndexOrThrow("calories");
       final List<Food> _result = new ArrayList<Food>(_cursor.getCount());
       while(_cursor.moveToNext()) {
@@ -100,6 +106,7 @@ public class FoodDao_Impl implements FoodDao {
         _item = new Food();
         _item.foodID = _cursor.getInt(_cursorIndexOfFoodID);
         _item.food_name = _cursor.getString(_cursorIndexOfFoodName);
+        _item.food_type = _cursor.getString(_cursorIndexOfFoodType);
         _item.calorie_value = _cursor.getFloat(_cursorIndexOfCalorieValue);
         _result.add(_item);
       }
@@ -124,12 +131,14 @@ public class FoodDao_Impl implements FoodDao {
     try {
       final int _cursorIndexOfFoodID = _cursor.getColumnIndexOrThrow("foodID");
       final int _cursorIndexOfFoodName = _cursor.getColumnIndexOrThrow("food_name");
+      final int _cursorIndexOfFoodType = _cursor.getColumnIndexOrThrow("food_type");
       final int _cursorIndexOfCalorieValue = _cursor.getColumnIndexOrThrow("calories");
       final Food _result;
       if(_cursor.moveToFirst()) {
         _result = new Food();
         _result.foodID = _cursor.getInt(_cursorIndexOfFoodID);
         _result.food_name = _cursor.getString(_cursorIndexOfFoodName);
+        _result.food_type = _cursor.getString(_cursorIndexOfFoodType);
         _result.calorie_value = _cursor.getFloat(_cursorIndexOfCalorieValue);
       } else {
         _result = null;

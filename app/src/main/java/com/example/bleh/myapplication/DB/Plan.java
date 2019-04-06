@@ -11,6 +11,10 @@ public class Plan {
 
     public int uid;
 
+    public double planDistribution;
+
+    public int workOutSessionDuration;
+
     public String type;
 
     public int nbOfDays;
@@ -24,6 +28,22 @@ public class Plan {
     public int workoutPerWeek;
 
     public double currentWeight;
+
+    public double getPlanDistribution() {
+        return planDistribution;
+    }
+
+    public void setPlanDistribution(double planDistribution) {
+        this.planDistribution = planDistribution;
+    }
+
+    public int getWorkOutSessionDuration() {
+        return workOutSessionDuration;
+    }
+
+    public void setWorkOutSessionDuration(int workOutSessionDuration) {
+        this.workOutSessionDuration = workOutSessionDuration;
+    }
 
     public double getCurrentWeight() {
         return currentWeight;

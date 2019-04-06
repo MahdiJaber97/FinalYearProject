@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "615c87294c5a416a41605115be09be8d",
+    "identityHash": "f85f9deedd9179a6c11a48f0b8e01c52",
     "entities": [
       {
         "tableName": "User",
@@ -74,7 +74,7 @@
       },
       {
         "tableName": "Food",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`foodID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `food_name` TEXT, `calories` REAL NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`foodID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `food_name` TEXT, `food_type` TEXT, `calories` REAL NOT NULL)",
         "fields": [
           {
             "fieldPath": "foodID",
@@ -85,6 +85,12 @@
           {
             "fieldPath": "food_name",
             "columnName": "food_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "food_type",
+            "columnName": "food_type",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -138,7 +144,7 @@
       },
       {
         "tableName": "Plan",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`planid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `uid` INTEGER NOT NULL, `type` TEXT, `nbOfDays` INTEGER NOT NULL, `amount` REAL NOT NULL, `progress` INTEGER NOT NULL, `bmr` REAL NOT NULL, `workoutPerWeek` INTEGER NOT NULL, `currentWeight` REAL NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`planid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `uid` INTEGER NOT NULL, `planDistribution` REAL NOT NULL, `workOutSessionDuration` INTEGER NOT NULL, `type` TEXT, `nbOfDays` INTEGER NOT NULL, `amount` REAL NOT NULL, `progress` INTEGER NOT NULL, `bmr` REAL NOT NULL, `workoutPerWeek` INTEGER NOT NULL, `currentWeight` REAL NOT NULL)",
         "fields": [
           {
             "fieldPath": "planid",
@@ -149,6 +155,18 @@
           {
             "fieldPath": "uid",
             "columnName": "uid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "planDistribution",
+            "columnName": "planDistribution",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "workOutSessionDuration",
+            "columnName": "workOutSessionDuration",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -207,7 +225,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"615c87294c5a416a41605115be09be8d\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"f85f9deedd9179a6c11a48f0b8e01c52\")"
     ]
   }
 }

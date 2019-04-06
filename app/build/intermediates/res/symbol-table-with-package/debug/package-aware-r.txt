@@ -820,6 +820,8 @@ drawable background
 drawable body
 drawable body1
 drawable body2
+drawable chefnoobese
+drawable chefok
 drawable cup
 drawable design_bottom_navigation_item_background
 drawable design_fab_background
@@ -845,6 +847,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable okchef
 drawable shape
 drawable sleeping
 drawable steps
@@ -856,6 +859,7 @@ id BMR
 id BluetoothConnection
 id CTRL
 id CheckMeasurements
+id DurationExercise
 id FUNCTION
 id FatsPercentage
 id Insert
@@ -866,6 +870,7 @@ id MeasureBodyComposition
 id MusclesPercentage
 id SHIFT
 id SYM
+id SeekBar
 id action0
 id action_bar
 id action_bar_activity_content
@@ -901,6 +906,7 @@ id blocking
 id body1
 id bottom
 id btn_scan
+id burnedCalories
 id buttonPanel
 id cancel_action
 id center
@@ -937,6 +943,7 @@ id end_padder
 id enterAlways
 id enterAlwaysCollapsed
 id et_submit
+id exer
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
@@ -970,6 +977,7 @@ id lname
 id lv_expandable
 id mainlayout
 id masked
+id meal
 id meas
 id media_actions
 id message
@@ -979,7 +987,6 @@ id multiply
 id navigation_header_container
 id never
 id next1
-id nextday
 id none
 id normal
 id notification_background
@@ -1032,6 +1039,12 @@ id snackbar_action
 id snackbar_text
 id snap
 id spacer
+id spinnerS1
+id spinnerS2
+id spinnerS3
+id spinnerW1
+id spinnerW2
+id spinnerW3
 id split_action_bar
 id spread
 id spread_inside
