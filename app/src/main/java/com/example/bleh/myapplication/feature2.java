@@ -57,7 +57,7 @@ import java.util.concurrent.TimeUnit;
 public class feature2 extends AppCompatActivity {
 
     public AppDatabase mydb;
-    TextView BMR,requirements,days,burnedCalories;
+    TextView maintainText,BMR,requirements,days,burnedCalories,progressbar;
     Button addfood,addex,nextday,resetPlan;
     LinearLayout mainLayout;
     Button Meas,Bluetooth;
@@ -87,6 +87,8 @@ public class feature2 extends AppCompatActivity {
         addfood = findViewById(R.id.addfood);
         Meas = findViewById(R.id.meas);
         BMR = findViewById(R.id.BMR);
+        progressbar = findViewById(R.id.progressbar);
+        maintainText = findViewById(R.id.maintainText);
         resetPlan = findViewById(R.id.resetPlan);
         mainLayout = findViewById(R.id.mainlayout);
         //////////
@@ -114,7 +116,7 @@ public class feature2 extends AppCompatActivity {
             View promptsView = li.inflate(R.layout.prompts, null);
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                    getApplicationContext());
+                    this);
 
             // set prompts.xml to alertdialog builder
             alertDialogBuilder.setView(promptsView);
@@ -171,62 +173,63 @@ public class feature2 extends AppCompatActivity {
         //Getting WorkOutSession Duration
         int sessionDuration = plan.workOutSessionDuration;
         /////////
-
+        final float caloriesRequiredToBeConsumed1 = sharedPreferences.getFloat("Requirements",-1);
+        final float caloriesRequiredToBeBurned1 = sharedPreferences.getFloat("BurnedRequirements",-1);
+        double caloriesRequiredToBeConsumed = caloriesRequiredToBeConsumed1;
+        double caloriesRequiredToBeBurned = caloriesRequiredToBeBurned1;
+        BreakfastAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
+        DinnerAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
+        DinnerAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
+        requirements.setText(df.format(caloriesRequiredToBeConsumed));
+        burnedCalories.setText(df.format(caloriesRequiredToBeBurned));
         //Defining the requirements of Calories Burned and Consumed according to the plan type.
-        if(plan.type.equals("Lose Weight"))
-        {
-            Log.wtf("Proportion:",plan.planDistribution+"");
-            Double caloriesRequiredDaily = FormulaUtils.calculateRequired(plan);
-            double caloriesRequiredToBeBurned = plan.planDistribution * caloriesRequiredDaily;
-            double caloriesRequiredToBeConsumed = caloriesRequiredDaily + CaloriesRequired + caloriesRequiredToBeBurned;
-            BreakfastAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
-            DinnerAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
-            DinnerAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
-            try
-            {
-                requirements.setText(Double.toString(caloriesRequiredToBeConsumed));
-                burnedCalories.setText(Double.toString(caloriesRequiredToBeBurned));
-            }
-            catch (Exception ex)
-            {
-                Log.wtf("There is no plan","!");
-            }
-        }
-        else if(plan.type.equals("Gain Weight"))
-        {
-            Double caloriesRequiredDaily = FormulaUtils.calculateRequired(plan);
-            double caloriesRequiredToBeBurned = 0;
-            double caloriesRequiredToBeConsumed = caloriesRequiredDaily + CaloriesRequired;
-            BreakfastAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
-            DinnerAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
-            DinnerAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
-            try
-            {
-                requirements.setText(Double.toString(caloriesRequiredToBeConsumed));
-                burnedCalories.setText(Double.toString(caloriesRequiredToBeBurned));
-            }
-            catch (Exception ex)
-            {
-                Log.wtf("There is no plan","!");
-            }
-        }
-        else
-        {
-            double caloriesRequiredToBeBurned = 0;
-            double caloriesRequiredToBeConsumed =  CaloriesRequired;
-            BreakfastAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
-            DinnerAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
-            DinnerAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
-            try
-            {
-                requirements.setText(Double.toString(caloriesRequiredToBeConsumed));
-                burnedCalories.setText(Double.toString(caloriesRequiredToBeBurned));
-            }
-            catch (Exception ex)
-            {
-                Log.wtf("There is no plan","!");
-            }
-        }
+//        if(plan.type.equals("Lose Weight"))
+//        {
+//            Double caloriesRequiredDaily = FormulaUtils.calculateRequired(plan);
+//
+//            try
+//            {
+//                requirements.setText(df.format(caloriesRequiredToBeConsumed));
+//                burnedCalories.setText(df.format(caloriesRequiredToBeBurned));
+//            }
+//            catch (Exception ex)
+//            {
+//                Log.wtf("There is no plan","!");
+//            }
+//        }
+//        else if(plan.type.equals("Gain Weight"))
+//        {
+//            Double caloriesRequiredDaily = FormulaUtils.calculateRequired(plan);
+//            BreakfastAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
+//            DinnerAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
+//            DinnerAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
+//            Log.wtf("calories",caloriesRequiredToBeConsumed+"");
+//            Log.wtf("calories",caloriesRequiredToBeBurned+"");
+//            try
+//            {
+//                requirements.setText(df.format(caloriesRequiredToBeConsumed));
+//                burnedCalories.setText(df.format(caloriesRequiredToBeBurned));
+//            }
+//            catch (Exception ex)
+//            {
+//                Log.wtf("There is no plan",ex);
+//            }
+//        }
+//        else
+//        {
+//            BreakfastAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
+//            DinnerAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
+//            DinnerAverageCalories = (int)(caloriesRequiredToBeConsumed*0.25);
+//            try
+//            {
+//                requirements.setText(df.format(caloriesRequiredToBeConsumed));
+//                burnedCalories.setText(df.format(caloriesRequiredToBeBurned));
+//            }
+//            catch (Exception ex)
+//            {
+//                Log.wtf("There is no plan","!");
+//            }
+//        }
         /////////////
 
         //Defining the AlarmReceiver to update the Database everyday at midnight
@@ -287,18 +290,37 @@ public class feature2 extends AppCompatActivity {
             }
         });
         //////////
-
+        double progress = 0;
         //Getting the progress done till now
-        double progress = FormulaUtils.calculatePercentage(user.getWeight(), plan.currentWeight, plan.amount, plan.type);
-        try
+        if(plan.type.equals("Maintain Weight"))
         {
-            donutProgress.setDonut_progress(String.valueOf(progress));
+            progressbar.setVisibility(View.GONE);
+            donutProgress.setVisibility(View.GONE);
+            maintainText.setVisibility(View.VISIBLE);
+            double NewWeight = user.weight;
+            double originalWeight = plan.getCurrentWeight();
+            double difference = NewWeight - originalWeight;
+            if(difference>0) {
+                maintainText.setText("You have gained "+df.format(difference)+" Kgs.");
+            }
+            else if(difference==0)
+            {
+                maintainText.setText("You have maintained your original weight of "+originalWeight+" Kgs.");
+            }
+            else
+            {
+                maintainText.setText("You have lost "+df.format(difference)+" Kgs.");
+            }
         }
-        catch (Exception e)
-        {
-            donutProgress.setDonut_progress("0");
-        }
-        donutProgress.setProgress((float) progress);
+        else
+            {
+                progress = FormulaUtils.calculatePercentage(user.getWeight(), plan.currentWeight, plan.amount, plan.type);
+                try {
+                    donutProgress.setDonut_progress(String.valueOf(progress));
+                } catch (Exception e) {
+                    donutProgress.setDonut_progress("0");
+                }
+                donutProgress.setProgress((float) progress); }
         /////////////////
 
         //Checking if Plan Duration have finished or Progress have been successfully met
@@ -454,7 +476,39 @@ public class feature2 extends AppCompatActivity {
                             else
                             {
                                 AlertDialog.Builder a_builder = new AlertDialog.Builder(feature2.this);
-                                a_builder.setMessage("You still have this amount of Calories as the difference between consumed and burned: " + Double.toString(Double.parseDouble(requirements.getText().toString())-Double.parseDouble(burnedCalories.getText().toString())))
+                                a_builder.setMessage("You still have this amount of Calories to be consumed : " + df.format(newRequirements))
+                                        .setCancelable(false)
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.cancel();
+                                            }
+                                        });
+                                AlertDialog alert = a_builder.create();
+                                alert.setTitle("Reminder");
+                                alert.show();
+                            }
+                        }
+                        else if(plan.type.equals("Gain Weight"))
+                        {
+                            if(newRequirements<0)
+                            {
+                                AlertDialog.Builder a_builder = new AlertDialog.Builder(feature2.this);
+                                a_builder.setMessage("You have exceeded the consumed target by " + df.format(newRequirements*-1))
+                                        .setCancelable(false)
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.cancel();
+                                            }
+                                        });
+                                AlertDialog alert = a_builder.create();
+                                alert.setTitle("Reminder");
+                                alert.show();
+                            }
+                            else {
+                                AlertDialog.Builder a_builder = new AlertDialog.Builder(feature2.this);
+                                a_builder.setMessage("You still have this amount of Calories to be consumed " + df.format(newRequirements))
                                         .setCancelable(false)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
@@ -469,19 +523,40 @@ public class feature2 extends AppCompatActivity {
                         }
                         else
                         {
-                            AlertDialog.Builder a_builder = new AlertDialog.Builder(feature2.this);
-                            a_builder.setMessage("You still have this amount of Calories as the difference between consumed and burned: " + Double.toString(Double.parseDouble(requirements.getText().toString())-Double.parseDouble(burnedCalories.getText().toString())))
-                                    .setCancelable(false)
-                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            dialogInterface.cancel();
-                                        }
-                                    });
-                            AlertDialog alert = a_builder.create();
-                            alert.setTitle("Reminder");
-                            alert.show();
+                            if(newRequirements<0)
+                            {
+                                AlertDialog.Builder a_builder = new AlertDialog.Builder(feature2.this);
+                                a_builder.setMessage("You have reached the consumed target now please look after the burned target")
+                                        .setCancelable(false)
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.cancel();
+                                            }
+                                        });
+                                AlertDialog alert = a_builder.create();
+                                alert.setTitle("Reminder");
+                                alert.show();
+                            }
+                            else
+                            {
+                                AlertDialog.Builder a_builder = new AlertDialog.Builder(feature2.this);
+                                a_builder.setMessage("You still have this amount of Calories to be consumed " + df.format(newRequirements))
+                                        .setCancelable(false)
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.cancel();
+                                            }
+                                        });
+                                AlertDialog alert = a_builder.create();
+                                alert.setTitle("Reminder");
+                                alert.show();
+                            }
                         }
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putFloat("Requirements",(float)newRequirements);
+                        editor.apply();
                         requirements.setText(df.format(newRequirements));
                     }
                 });
@@ -500,18 +575,21 @@ public class feature2 extends AppCompatActivity {
                 mainLayout.addView(linearLayout);
                 mainLayout.addView(linearLayout2);
                 mainLayout.addView(linearLayout5);
-                mainLayout.addView(linearLayout3);
-                mainLayout.addView(linearLayout6);
                 mainLayout.addView(linearLayout4);
                 linearLayout.addView(foodView);
                 linearLayout.addView(myspinner);
                 linearLayout2.addView(quantityView);
                 linearLayout2.addView(quantityText);
-                linearLayout3.addView(pb);
                 linearLayout4.addView(submitFood);
                 linearLayout5.addView(RatioText);
-                linearLayout6.addView(Decision);
 
+                if(plan.type.equals("Lose Weight"))
+                {
+                    linearLayout3.addView(pb);
+                    linearLayout6.addView(Decision);
+                    mainLayout.addView(linearLayout3);
+                    mainLayout.addView(linearLayout6);
+                }
                 myspinner.setAdapter(adapter);
                 myspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -658,6 +736,10 @@ public class feature2 extends AppCompatActivity {
                         AlertDialog alert1 = a_builder1.create();
                         alert1.setTitle("Alert");
                         alert1.show();
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putFloat("Requirements",(float)Double.parseDouble(requirements.getText().toString()) + (float)caloriesGained);
+                        editor.putFloat("BurnedRequirements",(float)Double.parseDouble(burnedCalories.getText().toString()) - (float)caloriesGained);
+                        editor.apply();
                         burnedCalories.setText(df.format(Double.parseDouble(burnedCalories.getText().toString()) - caloriesGained));
                         requirements.setText(df.format(Double.parseDouble(requirements.getText().toString()) + caloriesGained));
                         submitEx.setClickable(false);

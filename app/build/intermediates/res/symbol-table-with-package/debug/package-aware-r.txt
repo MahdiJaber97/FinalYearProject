@@ -898,6 +898,7 @@ id alertTitle
 id all
 id always
 id amount
+id amountText
 id async
 id auto
 id barrier
@@ -937,6 +938,7 @@ id direct
 id disableHome
 id donut_progress
 id duration
+id editTextDialogUserInput
 id edit_query
 id end
 id end_padder
@@ -968,6 +970,7 @@ id invisible
 id italic
 id item_touch_helper_previous_elevation
 id largeLabel
+id layout_root
 id left
 id line1
 id line3
@@ -976,6 +979,7 @@ id list_item
 id lname
 id lv_expandable
 id mainlayout
+id maintainText
 id masked
 id meal
 id meas
@@ -1002,9 +1006,11 @@ id percent
 id pin
 id progress_circular
 id progress_horizontal
+id progressbar
 id radio
 id recyclerview
 id requirements
+id resetPlan
 id right
 id right_icon
 id right_side
@@ -1064,6 +1070,7 @@ id text
 id text2
 id textSpacerNoButtons
 id textSpacerNoTitle
+id textView1
 id text_input_password_toggle
 id textinput_counter
 id textinput_error
@@ -1188,6 +1195,7 @@ layout notification_template_media
 layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
+layout prompts
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material

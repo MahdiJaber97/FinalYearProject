@@ -34,6 +34,32 @@ public class AlarmReceiver extends BroadcastReceiver {
         mydb.getPlanDao(context).update(plan);
         final SharedPreferences sharedPreferences = context.getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        String requiredCalories = FormulaUtils.CalulcateDailyRequirements(plan.getWorkoutPerWeek(), plan.getBmr());
+        Double CaloriesRequired = Double.parseDouble(requiredCalories);
+        if(plan.type.equals("Gain Weight"))
+        {
+            Double caloriesRequiredDaily = FormulaUtils.calculateRequired(plan);
+            double caloriesRequiredToBeBurned = 0;
+            double caloriesRequiredToBeConsumed = caloriesRequiredDaily + CaloriesRequired;
+            editor.putFloat("Requirements",(float)caloriesRequiredToBeConsumed );
+            editor.putFloat("BurnedRequirements",(float)caloriesRequiredToBeBurned );
+        }
+        else if(plan.type.equals("Maintain Weight"))
+        {
+            double caloriesRequiredToBeBurned = 0;
+            double caloriesRequiredToBeConsumed =  CaloriesRequired;
+            editor.putFloat("Requirements",(float)caloriesRequiredToBeConsumed );
+            editor.putFloat("BurnedRequirements",(float)caloriesRequiredToBeBurned );
+        }
+        else
+        {
+            Double caloriesRequiredDaily = FormulaUtils.calculateRequired(plan);
+            double caloriesRequiredToBeBurned = plan.planDistribution * caloriesRequiredDaily;
+            double caloriesRequiredToBeConsumed = caloriesRequiredDaily + CaloriesRequired + caloriesRequiredToBeBurned;
+            editor.putFloat("Requirements",(float)caloriesRequiredToBeConsumed );
+            editor.putFloat("BurnedRequirements",(float)caloriesRequiredToBeBurned );
+        }
+        editor.apply();
         editor.putInt("EnterCount",0);
         editor.apply();
     }

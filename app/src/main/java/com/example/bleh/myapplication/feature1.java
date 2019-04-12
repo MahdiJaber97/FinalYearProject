@@ -1,6 +1,8 @@
 package com.example.bleh.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class feature1 extends AppCompatActivity {
-    TextView BMR,meal,exer;
+    TextView BMR,meal,exer,amountText;
     EditText duration,amount;
     Spinner type;
     Button submit;
@@ -44,6 +46,7 @@ public class feature1 extends AppCompatActivity {
         seekBar = findViewById(R.id.SeekBar);
         meal = findViewById(R.id.meal);
         exer = findViewById(R.id.exer);
+        amountText = findViewById(R.id.amountText);
         DurationExercise = findViewById(R.id.DurationExercise);
         if(flag==1)
         {
@@ -90,6 +93,14 @@ public class feature1 extends AppCompatActivity {
                     seekBar.setVisibility(View.VISIBLE);
                     exer.setVisibility(View.VISIBLE);
                 }
+                else if(type.getSelectedItem()=="Maintain Weight")
+                {
+                    amount.setVisibility(View.GONE);
+                    amountText.setVisibility(View.GONE);
+                    meal.setVisibility(View.GONE);
+                    seekBar.setVisibility(View.GONE);
+                    exer.setVisibility(View.GONE);
+                }
                 else
                 {
                     meal.setVisibility(View.GONE);
@@ -111,10 +122,16 @@ public class feature1 extends AppCompatActivity {
             public void onClick(View v)
             {
                 Plan plan = db.getPlanDao(feature1.this).getPlanById((int)planid);
-                plan.amount=Double.parseDouble(amount.getText().toString());
+                plan.type = type.getSelectedItem().toString();
+                if(plan.type.equals("Maintain Weight"))
+                {
+                    plan.amount = 0;
+                }
+                else {
+                    plan.amount = Double.parseDouble(amount.getText().toString());
+                }
                 plan.bmr= Double.parseDouble(BMR.getText().toString());
                 plan.nbOfDays=Integer.parseInt(duration.getText().toString());
-                plan.type = type.getSelectedItem().toString();
                 plan.workOutSessionDuration = Integer.parseInt(DurationExercise.getSelectedItem().toString().substring(0,2));
                 if(plan.type.equals("Lose Weight"))
                 {
@@ -130,6 +147,34 @@ public class feature1 extends AppCompatActivity {
                 newintent.putExtra("uid",uid);
                 newintent.putExtra("planid",planid);
                 startActivity(newintent);
+                SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                String requiredCalories = FormulaUtils.CalulcateDailyRequirements(plan.getWorkoutPerWeek(), plan.getBmr());
+                Double CaloriesRequired = Double.parseDouble(requiredCalories);
+                if(plan.type.equals("Gain Weight"))
+                {
+                    Double caloriesRequiredDaily = FormulaUtils.calculateRequired(plan);
+                    double caloriesRequiredToBeBurned = 0;
+                    double caloriesRequiredToBeConsumed = caloriesRequiredDaily + CaloriesRequired;
+                    editor.putFloat("Requirements",(float)caloriesRequiredToBeConsumed );
+                    editor.putFloat("BurnedRequirements",(float)caloriesRequiredToBeBurned );
+                }
+                else if(plan.type.equals("Maintain Weight"))
+                {
+                    double caloriesRequiredToBeBurned = 0;
+                    double caloriesRequiredToBeConsumed =  CaloriesRequired;
+                    editor.putFloat("Requirements",(float)caloriesRequiredToBeConsumed );
+                    editor.putFloat("BurnedRequirements",(float)caloriesRequiredToBeBurned );
+                }
+                else
+                {
+                    Double caloriesRequiredDaily = FormulaUtils.calculateRequired(plan);
+                    double caloriesRequiredToBeBurned = plan.planDistribution * caloriesRequiredDaily;
+                    double caloriesRequiredToBeConsumed = caloriesRequiredDaily + CaloriesRequired + caloriesRequiredToBeBurned;
+                    editor.putFloat("Requirements",(float)caloriesRequiredToBeConsumed );
+                    editor.putFloat("BurnedRequirements",(float)caloriesRequiredToBeBurned );
+                }
+                editor.apply();
                 finish();
             }
         });
